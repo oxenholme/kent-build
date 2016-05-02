@@ -53,22 +53,28 @@ clean:
 
 
 $(DEBUG_PROGS):		$(OBJS:%=target/debug/%)
+	mkdir -p `dirname $@`; \
 	$(LINK.cpp) -o $@ $(OBJS:%=target/debug/%) $(INCLIBS)
 
 $(DEBUG_LIBS):		$(OBJS:%=target/debug/%)
+	mkdir -p `dirname $@`; \
 	$(AR) rs $@ $(OBJS:%=target/debug/%)
 
 $(DEBUG_TESTS):		$(TEST_OBJS:%=testTarget/debug/%)
+	mkdir -p `dirname $@`; \
 	$(LINK.cpp) -o $@ $(TEST_OBJS:%=testTarget/debug/%) $(DEBUG_LIBS) $(INCLIBS)
 	$@
 
 $(RELEASE_PROGS):	$(OBJS:%=target/release/%)
+	mkdir -p `dirname $@`; \
 	$(LINK.cpp) -o $@ $(OBJS:%=target/release/%) $(INCLIBS)
 
 $(RELEASE_LIBS):	$(OBJS:%=target/release/%)
+	mkdir -p `dirname $@`; \
 	$(AR) rs $@ $(OBJS:%=target/release/%)
 
 $(RELEASE_TESTS):	$(TEST_OBJS:%=testTarget/release/%)
+	mkdir -p `dirname $@`; \
 	$(LINK.cpp) -o $@ $(TEST_OBJS:%=testTarget/release/%) $(RELEASE_LIBS) $(INCLIBS)
 	$@
 
