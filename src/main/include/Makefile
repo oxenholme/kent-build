@@ -60,7 +60,7 @@ $(DEBUG_LIBS):		$(OBJS:%=target/debug/%)
 	mkdir -p `dirname $@`; \
 	$(AR) rs $@ $(OBJS:%=target/debug/%)
 
-$(DEBUG_TESTS):		$(TEST_OBJS:%=testTarget/debug/%)
+$(DEBUG_TESTS):		$(TEST_OBJS:%=testTarget/debug/%) $(DEBUG_LIBS)
 	mkdir -p `dirname $@`; \
 	$(LINK.cpp) -o $@ $(TEST_OBJS:%=testTarget/debug/%) $(DEBUG_LIBS) $(INCLIBS)
 	$@
@@ -73,7 +73,7 @@ $(RELEASE_LIBS):	$(OBJS:%=target/release/%)
 	mkdir -p `dirname $@`; \
 	$(AR) rs $@ $(OBJS:%=target/release/%)
 
-$(RELEASE_TESTS):	$(TEST_OBJS:%=testTarget/release/%)
+$(RELEASE_TESTS):	$(TEST_OBJS:%=testTarget/release/%) $(RELEASE_LIBS)
 	mkdir -p `dirname $@`; \
 	$(LINK.cpp) -o $@ $(TEST_OBJS:%=testTarget/release/%) $(RELEASE_LIBS) $(INCLIBS)
 	$@
