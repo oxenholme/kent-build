@@ -1,3 +1,16 @@
+# This makefile is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# This makefile is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this makefile.  If not, see <http://www.gnu.org/licenses/>.
+
 DEBUG_PROGS=$(PROGS:%=target/debug/%)
 DEBUG_TESTS=$(TESTS:%=testTarget/debug/%)
 DEBUG_LIBS=$(LIBS:%=target/debug/%)
@@ -11,12 +24,14 @@ CPPFLAGS+=-std=c++14 -Isrc/main/include -Isrc/main/cpp -I../include
 
 
 debug-base debug-test:		CXXFLAGS+=-Og -g
-release-base release-test:	CXXFLAGS+=-O2
+release-base release-test:	CXXFLAGS+=-O2 -flto
 
 debug-base debug-test:		LDFLAGS+=-L../debug
 release-base release-test:	LDFLAGS+=-L../release
 
 debug-test release-test:        INCLIBS+=-ltest
+
+release-base release-test:	AR=gcc-ar
 
 
 
